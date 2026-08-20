@@ -8,11 +8,11 @@ const introText = document.getElementById("introText");
 const envelopeScene =
     document.getElementById("envelopeScene");
 
-const envelopeWrapper =
-    document.getElementById("envelopeWrapper");
-
 const envelope =
     document.getElementById("envelope");
+
+const envelopeWrapper =
+    document.getElementById("envelopeWrapper");
 
 const letterScene =
     document.getElementById("letterScene");
@@ -32,13 +32,9 @@ const finalScene =
 ===================================================== */
 
 const messages = [
-
-    "Heyy Inaya~",
-
-    "First, I'm sorry the wish came in so late 🥲",
-
+    "Heyyy Inaya~",
+    "First, I'm sorry the wish came in so late 😔",
     "I hope you like this ;]"
-
 ];
 
 
@@ -46,12 +42,16 @@ let currentMessage = 0;
 
 
 /* =====================================================
-   INTRO SEQUENCE
+   SHOW INTRO MESSAGE
 ===================================================== */
 
 function showMessage() {
 
     introText.classList.remove("fade-up");
+
+    /*
+       Reset the animation so it can play again.
+    */
 
     introText.style.animation = "none";
 
@@ -65,7 +65,7 @@ function showMessage() {
 
 
     /*
-       Keep each message on screen for 2.2 seconds.
+       Keep the message visible.
     */
 
     setTimeout(() => {
@@ -76,7 +76,7 @@ function showMessage() {
 
 
     /*
-       Move to the next message.
+       Move to next message.
     */
 
     setTimeout(() => {
@@ -88,11 +88,6 @@ function showMessage() {
             showMessage();
 
         } else {
-
-            /*
-               After the final message disappears,
-               reveal the envelope.
-            */
 
             setTimeout(() => {
 
@@ -108,7 +103,7 @@ function showMessage() {
 
 
 /* =====================================================
-   ENVELOPE
+   SHOW ENVELOPE
 ===================================================== */
 
 let shakeInterval = null;
@@ -120,7 +115,7 @@ function showEnvelope() {
 
     envelopeScene.classList.remove("hidden");
 
-    startEnvelopeShake();
+    startEnvelopeShaking();
 
 }
 
@@ -129,21 +124,19 @@ function showEnvelope() {
    ENVELOPE SHAKE
 ===================================================== */
 
-function startEnvelopeShake() {
+function startEnvelopeShaking() {
 
     clearInterval(shakeInterval);
-
 
     shakeInterval = setInterval(() => {
 
         /*
-           Don't shake while the envelope is open.
+           Don't shake while it is opening.
         */
 
         if (envelope.classList.contains("open")) {
             return;
         }
-
 
         envelope.classList.remove("shake");
 
@@ -170,8 +163,8 @@ envelopeWrapper.addEventListener("click", () => {
 
 
     /*
-       Give the envelope time to open
-       before transitioning to the letter.
+       Wait for the flap + paper animation
+       to complete before changing scenes.
     */
 
     setTimeout(() => {
@@ -180,33 +173,36 @@ envelopeWrapper.addEventListener("click", () => {
 
         letterScene.classList.remove("hidden");
 
-    }, 1100);
+    }, 1450);
 
 });
 
 
 /* =====================================================
-   CLOSE LETTER
+   DONE READING
 ===================================================== */
 
 doneButton.addEventListener("click", () => {
 
     /*
-       Fold the paper away.
+       Start the folding animation.
     */
 
     letterPaper.classList.add("fold-back");
 
     doneButton.style.opacity = "0";
 
+    doneButton.style.pointerEvents = "none";
+
+
+    /*
+       Once the paper has folded,
+       return to the envelope.
+    */
 
     setTimeout(() => {
 
         letterScene.classList.add("hidden");
-
-        /*
-           Bring the envelope back.
-        */
 
         envelopeScene.classList.remove("hidden");
 
@@ -216,26 +212,28 @@ doneButton.addEventListener("click", () => {
 
         doneButton.style.opacity = "1";
 
+        doneButton.style.pointerEvents = "auto";
 
-    }, 1300);
+
+    }, 1250);
 
 
     /*
-       After the envelope returns,
-       leave it on screen for a moment.
+       Give the envelope a tiny shake
+       when it returns.
     */
 
     setTimeout(() => {
 
         envelope.classList.add("shake");
 
-    }, 1700);
+    }, 1550);
 
 });
 
 
 /* =====================================================
-   START
+   START WEBSITE
 ===================================================== */
 
 showMessage();
