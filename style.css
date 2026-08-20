@@ -1316,3 +1316,74 @@ body::before {
     }
 
 }
+
+
+/* =====================================================
+   FINAL GIF
+===================================================== */
+
+.final-scene {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff9ed 0%,
+            #f7e8d1 100%
+        );
+
+    animation:
+        finalFadeIn 1s ease forwards;
+}
+
+
+.final-scene iframe {
+    width: min(500px, 75vw);
+    height: min(500px, 75vw);
+
+    border: none;
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 35px rgba(80, 45, 20, 0.15);
+
+    animation:
+        gifAppear 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+
+@keyframes finalFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes gifAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.85)
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
