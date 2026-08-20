@@ -185,55 +185,26 @@ envelopeWrapper.addEventListener("click", () => {
 doneButton.addEventListener("click", () => {
 
     /*
-       Start the folding animation.
+       Fold the letter away.
     */
 
     letterPaper.classList.add("fold-back");
 
     doneButton.style.opacity = "0";
-
     doneButton.style.pointerEvents = "none";
 
 
     /*
-       Once the paper has folded,
-       return to the envelope.
+       After the folding animation,
+       reveal the GIF instead of the envelope.
     */
 
     setTimeout(() => {
 
         letterScene.classList.add("hidden");
 
-        envelopeScene.classList.remove("hidden");
+        finalScene.classList.remove("hidden");
 
-        envelope.classList.remove("open");
-
-        letterPaper.classList.remove("fold-back");
-
-        doneButton.style.opacity = "1";
-
-        doneButton.style.pointerEvents = "auto";
-
-
-    }, 1250);
-
-
-    /*
-       Give the envelope a tiny shake
-       when it returns.
-    */
-
-    setTimeout(() => {
-
-        envelope.classList.add("shake");
-
-    }, 1550);
+    }, 1300);
 
 });
-
-
-/* =====================================================
-   START WEBSITE
-===================================================== */
-
-showMessage();
