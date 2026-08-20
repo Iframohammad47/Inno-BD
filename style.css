@@ -1231,3 +1231,88 @@ body::before {
     }
 
 }
+
+/* =====================================================
+   FINAL GIF
+===================================================== */
+
+.final-scene {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff9ed 0%,
+            #f7e8d1 100%
+        );
+
+    animation:
+        finalFadeIn 1s ease forwards;
+}
+
+
+.birthday-gif {
+    display: block;
+
+    max-width: 80vw;
+    max-height: 75vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    filter:
+        drop-shadow(
+            0 15px 25px rgba(80, 45, 20, 0.15)
+        );
+
+    animation:
+        gifAppear 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+
+@keyframes finalFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes gifAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.88)
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .birthday-gif {
+        max-width: 90vw;
+        max-height: 70vh;
+    }
+
+}
