@@ -16,85 +16,106 @@
 
 <body>
 
-    <!-- =========================
+    <!-- =========================================
          INTRO
-    ========================== -->
+    ========================================== -->
 
-    <main id="intro" class="intro">
+    <section id="intro" class="intro">
 
-        <div class="decor decor-left">❧</div>
-        <div class="decor decor-right">✧</div>
-        <div class="little-heart">♡</div>
+        <div class="leaf leaf-one">❧</div>
+        <div class="leaf leaf-two">❧</div>
+
+        <div class="spark spark-one">✦</div>
+        <div class="spark spark-two">✧</div>
+
+        <div class="heart-decoration">♡</div>
 
         <div id="introText" class="intro-text">
-            Heyy Inaya~
+            Heyyy Inaya~
         </div>
 
-        <div class="dots">
-            <span class="active"></span>
-            <span></span>
-            <span></span>
+        <div class="intro-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
 
-    </main>
+    </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          ENVELOPE
-    ========================== -->
+    ========================================== -->
 
-    <section id="envelopeScene" class="scene hidden">
+    <section id="envelopeScene" class="envelope-scene hidden">
 
-        <div class="envelope-area">
+        <div class="envelope-container">
 
-            <div class="envelope-hint">
+            <div class="envelope-note">
                 There's something<br>
                 inside...
-                <span class="arrow">↘</span>
+                <div class="note-arrow">↘</div>
             </div>
 
 
             <div
                 id="envelopeWrapper"
                 class="envelope-wrapper"
-                aria-label="Open the envelope"
             >
 
                 <div id="envelope" class="envelope">
 
-                    <!-- Paper sticking out -->
-                    <div class="paper-preview">
-                        <div class="preview-decoration">♡</div>
+                    <!-- Paper -->
+                    <div class="letter-preview">
+
+                        <div class="preview-leaf">
+                            ❧
+                        </div>
+
+                        <div class="preview-heart">
+                            ♡
+                        </div>
+
                     </div>
 
-                    <!-- Inside of envelope -->
-                    <div class="envelope-inside"></div>
+
+                    <!-- Back of envelope -->
+                    <div class="envelope-back"></div>
+
 
                     <!-- Front pocket -->
-                    <div class="envelope-front">
+                    <div class="envelope-pocket">
 
-                        <div class="front-fold left"></div>
-                        <div class="front-fold right"></div>
-
-                        <div class="heart-seal">♥</div>
+                        <div class="pocket-left"></div>
+                        <div class="pocket-right"></div>
 
                     </div>
 
-                    <!-- Flap -->
+
+                    <!-- Top flap -->
                     <div class="envelope-flap"></div>
 
+
+                    <!-- Wax/paper seal -->
+                    <div class="envelope-seal">
+                        ♥
+                    </div>
+
                 </div>
+
 
                 <div class="click-hint">
                     click the envelope ♡
                 </div>
 
-                <div class="shake-lines left-line">⌁</div>
-                <div class="shake-lines right-line">⌁</div>
+
+                <div class="shake-mark mark-left">⌁</div>
+                <div class="shake-mark mark-right">⌁</div>
 
             </div>
 
-            <div class="bottom-sprig">
+
+            <div class="bottom-decoration">
                 ❧
             </div>
 
@@ -103,63 +124,53 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          LETTER
-    ========================== -->
+    ========================================== -->
 
     <section id="letterScene" class="letter-scene hidden">
 
-        <div class="letter-wrapper">
+        <div class="letter-container">
 
             <div id="letterPaper" class="letter-paper">
 
-                <div class="paper-edge"></div>
+                <div class="paper-texture"></div>
 
-                <div class="letter-decoration top-left">
+                <div class="letter-flower top-left">
                     ❧
                 </div>
 
-                <div class="letter-decoration top-right">
+                <div class="letter-heart top-right">
                     ♡
                 </div>
 
-                <div class="letter-decoration bottom-right">
+                <div class="letter-flower bottom-right">
                     ❧
                 </div>
 
 
                 <div class="letter-content">
 
-                    <h1>Dear Inaya,</h1>
+                    <h1>Heyyy,</h1>
 
                     <p>
-                        Happy 13th birthday!! 🎂
-                    </p>
-
-                    <p>
-                        I hope you have an absolutely amazing day
-                        and that this year brings you lots of happiness,
-                        good memories, and hopefully fewer annoying people.
+                        Soo I'll try to keep this as cringeless as possible
+                        but like happy birthday bbg! You're officially a
+                        teenager and that makes me so happy I could legit
+                        explode or smth :>
                     </p>
 
                     <p>
-                        You're officially thirteen now, which is
-                        slightly terrifying because apparently time
-                        has decided to sprint instead of walk.
+                        Jokes aside, I really hope the upcoming year holds
+                        nothing but happiness for you filled with amazing
+                        people, memories and fun. May Allah grant you only
+                        the best of both worlds (Ameen)&lt;3
                     </p>
 
-                    <p>
-                        Anyway, I hope you know how awesome you are
-                        and how much you mean to the people around you.
-                    </p>
-
-                    <p>
-                        Have an amazing birthday, Inaya ♡
-                    </p>
-
-                    <p class="signature">
-                        — From me :)
-                    </p>
+                    <div class="letter-signoff">
+                        Yours lovingly,<br>
+                        <span>Ifra</span>
+                    </div>
 
                 </div>
 
@@ -167,7 +178,7 @@
 
 
             <button id="doneButton" class="done-button">
-                done reading?
+                done reading? ♡
             </button>
 
         </div>
@@ -175,15 +186,22 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          FINAL
-    ========================== -->
+    ========================================== -->
 
     <section id="finalScene" class="final-scene hidden">
 
-        <div class="final-message">
-            <span>That's all for now ♡</span>
-            <small>Happy birthday, Inaya!</small>
+        <div class="final-content">
+
+            <div class="final-sparkles">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+            <h2>That's all for now ♡</h2>
+
+            <p>Happy birthday, Inaya!</p>
+
         </div>
 
     </section>
