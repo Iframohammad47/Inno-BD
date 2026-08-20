@@ -1,41 +1,72 @@
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
 const intro = document.getElementById("intro");
 const introText = document.getElementById("introText");
 
-const envelopeScene = document.getElementById("envelopeScene");
-const envelope = document.getElementById("envelope");
-const envelopeWrapper = document.getElementById("envelopeWrapper");
+const envelopeScene =
+    document.getElementById("envelopeScene");
 
-const letterScene = document.getElementById("letterScene");
-const letterPaper = document.getElementById("letterPaper");
+const envelopeWrapper =
+    document.getElementById("envelopeWrapper");
 
-const doneButton = document.getElementById("doneButton");
+const envelope =
+    document.getElementById("envelope");
+
+const letterScene =
+    document.getElementById("letterScene");
+
+const letterPaper =
+    document.getElementById("letterPaper");
+
+const doneButton =
+    document.getElementById("doneButton");
+
+const finalScene =
+    document.getElementById("finalScene");
 
 
-/* -------------------------
-   INTRO SEQUENCE
-------------------------- */
+/* =====================================================
+   INTRO MESSAGES
+===================================================== */
 
 const messages = [
+
     "Heyy Inaya~",
+
     "First, I'm sorry the wish came in so late 🥲",
+
     "I hope you like this ;]"
+
 ];
+
 
 let currentMessage = 0;
 
 
-function showNextMessage() {
+/* =====================================================
+   INTRO SEQUENCE
+===================================================== */
+
+function showMessage() {
 
     introText.classList.remove("fade-up");
-
-    introText.textContent = messages[currentMessage];
 
     introText.style.animation = "none";
 
     void introText.offsetWidth;
 
-    introText.style.animation = "introAppear 1.2s ease forwards";
+    introText.textContent =
+        messages[currentMessage];
 
+    introText.style.animation =
+        "introAppear 1.2s ease forwards";
+
+
+    /*
+       Keep each message on screen for 2.2 seconds.
+    */
 
     setTimeout(() => {
 
@@ -44,27 +75,44 @@ function showNextMessage() {
     }, 2200);
 
 
+    /*
+       Move to the next message.
+    */
+
     setTimeout(() => {
 
         currentMessage++;
 
         if (currentMessage < messages.length) {
 
-            showNextMessage();
+            showMessage();
 
         } else {
 
-            setTimeout(showEnvelope, 700);
+            /*
+               After the final message disappears,
+               reveal the envelope.
+            */
+
+            setTimeout(() => {
+
+                showEnvelope();
+
+            }, 650);
 
         }
 
     }, 3500);
+
 }
 
 
-/* -------------------------
-   SHOW ENVELOPE
-------------------------- */
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+let shakeInterval = null;
+
 
 function showEnvelope() {
 
@@ -72,36 +120,45 @@ function showEnvelope() {
 
     envelopeScene.classList.remove("hidden");
 
-    startEnvelopeShaking();
+    startEnvelopeShake();
+
 }
 
 
-/* -------------------------
+/* =====================================================
    ENVELOPE SHAKE
-------------------------- */
+===================================================== */
 
-let shakeInterval;
+function startEnvelopeShake() {
 
+    clearInterval(shakeInterval);
 
-function startEnvelopeShaking() {
 
     shakeInterval = setInterval(() => {
 
+        /*
+           Don't shake while the envelope is open.
+        */
+
+        if (envelope.classList.contains("open")) {
+            return;
+        }
+
+
+        envelope.classList.remove("shake");
+
+        void envelope.offsetWidth;
+
         envelope.classList.add("shake");
 
-        setTimeout(() => {
-
-            envelope.classList.remove("shake");
-
-        }, 450);
-
     }, 2000);
+
 }
 
 
-/* -------------------------
+/* =====================================================
    OPEN ENVELOPE
-------------------------- */
+===================================================== */
 
 envelopeWrapper.addEventListener("click", () => {
 
@@ -111,46 +168,74 @@ envelopeWrapper.addEventListener("click", () => {
 
     envelope.classList.add("open");
 
+
+    /*
+       Give the envelope time to open
+       before transitioning to the letter.
+    */
+
     setTimeout(() => {
 
         envelopeScene.classList.add("hidden");
 
         letterScene.classList.remove("hidden");
 
-    }, 1200);
+    }, 1100);
 
 });
 
 
-/* -------------------------
+/* =====================================================
    CLOSE LETTER
-------------------------- */
+===================================================== */
 
 doneButton.addEventListener("click", () => {
 
+    /*
+       Fold the paper away.
+    */
+
     letterPaper.classList.add("fold-back");
+
+    doneButton.style.opacity = "0";
+
 
     setTimeout(() => {
 
         letterScene.classList.add("hidden");
 
+        /*
+           Bring the envelope back.
+        */
+
         envelopeScene.classList.remove("hidden");
 
         envelope.classList.remove("open");
 
-        envelope.classList.remove("shake");
+        letterPaper.classList.remove("fold-back");
 
-        setTimeout(() => {
+        doneButton.style.opacity = "1";
 
-            startEnvelopeShaking();
-
-        }, 500);
 
     }, 1300);
+
+
+    /*
+       After the envelope returns,
+       leave it on screen for a moment.
+    */
+
+    setTimeout(() => {
+
+        envelope.classList.add("shake");
+
+    }, 1700);
 
 });
 
 
-/* Start */
+/* =====================================================
+   START
+===================================================== */
 
-showNextMessage();
+showMessage();
