@@ -533,9 +533,315 @@ body::before {
 }
 
 
-/* =============================
-   Envelope opening
-============================= */
+/* =====================================================
+   ENVELOPE SCENE
+===================================================== */
+
+.scene {
+    position: fixed;
+    inset: 0;
+
+    animation: sceneFadeIn 1s ease;
+}
+
+
+.envelope-area {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+.envelope-wrapper {
+    position: relative;
+
+    width: 390px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.envelope {
+    position: relative;
+
+    width: 360px;
+    height: 250px;
+
+    margin: 0 auto;
+
+    filter:
+        drop-shadow(
+            0 18px 18px rgba(74, 43, 21, 0.22)
+        );
+
+    animation:
+        gentleFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes gentleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+/* =====================================================
+   PAPER INSIDE
+===================================================== */
+
+.paper-preview {
+
+    position: absolute;
+
+    left: 45px;
+    top: 25px;
+
+    width: 270px;
+    height: 185px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf0,
+            #f5e5ca
+        );
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 3px 8px rgba(70, 42, 21, 0.15);
+
+    z-index: 2;
+
+    transition:
+        transform 1s ease,
+        top 1s ease;
+}
+
+
+.paper-preview::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.3;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 25px,
+            rgba(110, 74, 43, 0.08) 26px
+        );
+}
+
+
+.preview-decoration {
+
+    position: absolute;
+
+    right: 25px;
+    bottom: 15px;
+
+    color: #b36c37;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 2rem;
+}
+
+
+/* =====================================================
+   ENVELOPE BACK
+===================================================== */
+
+.envelope-inside {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 360px;
+    height: 190px;
+
+    background: #7d4d2d;
+
+    border-radius: 5px;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   FRONT POCKET
+===================================================== */
+
+.envelope-front {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 360px;
+    height: 175px;
+
+    background: #986039;
+
+    border-radius: 5px;
+
+    z-index: 4;
+
+    overflow: hidden;
+}
+
+
+/* left diagonal fold */
+
+.front-fold.left {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 180px;
+    height: 175px;
+
+    background: #7c4b2d;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 55%,
+            0 100%
+        );
+}
+
+
+/* right diagonal fold */
+
+.front-fold.right {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 180px;
+    height: 175px;
+
+    background: #a46b42;
+
+    clip-path:
+        polygon(
+            100% 0,
+            0 55%,
+            100% 100%
+        );
+}
+
+
+/* =====================================================
+   ENVELOPE FLAP
+===================================================== */
+
+.envelope-flap {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 360px;
+    height: 145px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #b67a4b,
+            #9d653d
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin: top center;
+
+    z-index: 7;
+
+    transition:
+        transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =====================================================
+   HEART SEAL
+===================================================== */
+
+.heart-seal {
+
+    position: absolute;
+
+    left: 50%;
+    top: 54%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #6d3c20;
+
+    font-size: 1.4rem;
+
+    z-index: 10;
+
+    filter:
+        drop-shadow(
+            0 2px 2px rgba(50, 25, 10, 0.2)
+        );
+}
+
+
+/* =====================================================
+   OPENING
+===================================================== */
 
 .envelope.open .envelope-flap {
 
@@ -546,16 +852,16 @@ body::before {
 
 .envelope.open .paper-preview {
 
-    bottom: 110px;
+    top: -40px;
 
     transform:
-        scale(1.03);
+        scale(1.04);
 }
 
 
-/* =============================
-   Shake
-============================= */
+/* =====================================================
+   SHAKE
+===================================================== */
 
 .envelope.shake {
 
@@ -597,11 +903,12 @@ body::before {
 }
 
 
-/* =============================
-   Envelope text
-============================= */
+/* =====================================================
+   ENVELOPE TEXT
+===================================================== */
 
 .envelope-hint {
+
     position: absolute;
 
     left: calc(50% - 470px);
@@ -620,11 +927,12 @@ body::before {
 
     color: #765437;
 
-    z-index: 3;
+    z-index: 20;
 }
 
 
 .arrow {
+
     display: block;
 
     margin-left: 90px;
@@ -637,6 +945,7 @@ body::before {
 
 
 .click-hint {
+
     margin-top: 25px;
 
     text-align: center;
@@ -668,20 +977,28 @@ body::before {
 }
 
 
+/* =====================================================
+   DECORATIONS
+===================================================== */
+
 .shake-lines {
+
     position: absolute;
 
-    top: 110px;
+    top: 100px;
 
     color: #c1844c;
 
     font-size: 2rem;
 
     opacity: 0.6;
+
+    z-index: 20;
 }
 
 
 .left-line {
+
     left: 0;
 
     transform: rotate(35deg);
@@ -689,6 +1006,7 @@ body::before {
 
 
 .right-line {
+
     right: 0;
 
     transform: rotate(-35deg);
@@ -696,6 +1014,7 @@ body::before {
 
 
 .bottom-sprig {
+
     position: absolute;
 
     bottom: 65px;
@@ -710,6 +1029,60 @@ body::before {
 }
 
 
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .envelope {
+
+        width: 310px;
+        height: 215px;
+    }
+
+    .envelope-inside,
+    .envelope-front {
+
+        width: 310px;
+    }
+
+    .envelope-flap {
+
+        width: 310px;
+        height: 125px;
+    }
+
+    .paper-preview {
+
+        left: 38px;
+
+        width: 234px;
+        height: 155px;
+    }
+
+    .envelope-hint {
+
+        left: 12%;
+
+        top: 22%;
+
+        transform: none;
+
+        font-size: 1.2rem;
+    }
+
+    .shake-lines {
+
+        display: none;
+    }
+
+    .bottom-sprig {
+
+        bottom: 35px;
+    }
+
+}
 /* =====================================================
    LETTER
 ===================================================== */
