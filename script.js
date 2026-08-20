@@ -38,66 +38,80 @@ const messages = [
 ];
 
 
-let currentMessage = 0;
-
-
 /* =====================================================
-   SHOW INTRO MESSAGE
+   INTRO SEQUENCE
 ===================================================== */
 
-function showMessage() {
+function startIntro() {
 
-    introText.classList.remove("fade-up");
+    let index = 0;
 
-    /*
-       Reset the animation so it can play again.
-    */
+    function showNextMessage() {
 
-    introText.style.animation = "none";
+        /* Remove old animation */
+        introText.classList.remove("fade-up");
 
-    void introText.offsetWidth;
+        /* Reset animation */
+        introText.style.animation = "none";
 
-    introText.textContent =
-        messages[currentMessage];
+        /*
+           Force browser to restart the animation.
+        */
+        void introText.offsetWidth;
 
-    introText.style.animation =
-        "introAppear 1.2s ease forwards";
+        /* Set the new message */
+        introText.textContent = messages[index];
 
-
-    /*
-       Keep the message visible.
-    */
-
-    setTimeout(() => {
-
-        introText.classList.add("fade-up");
-
-    }, 2200);
+        /* Fade the new message in */
+        introText.style.animation =
+            "introAppear 1.2s ease forwards";
 
 
-    /*
-       Move to next message.
-    */
+        /*
+           Keep it visible for 2.2 seconds,
+           then move it upward and fade it out.
+        */
+        setTimeout(() => {
 
-    setTimeout(() => {
+            introText.classList.add("fade-up");
 
-        currentMessage++;
+        }, 2200);
 
-        if (currentMessage < messages.length) {
 
-            showMessage();
+        /*
+           Wait until the fade-out is finished,
+           then show the next message.
+        */
+        setTimeout(() => {
 
-        } else {
+            index++;
 
-            setTimeout(() => {
+            if (index < messages.length) {
 
-                showEnvelope();
+                showNextMessage();
 
-            }, 650);
+            } else {
 
-        }
+                /*
+                   All intro messages are finished.
+                   Now show the envelope.
+                */
 
-    }, 3500);
+                setTimeout(() => {
+
+                    showEnvelope();
+
+                }, 500);
+
+            }
+
+        }, 3500);
+
+    }
+
+
+    /* Start the first message */
+    showNextMessage();
 
 }
 
@@ -106,7 +120,7 @@ function showMessage() {
    SHOW ENVELOPE
 ===================================================== */
 
-let shakeInterval = null;
+let shakeInterval;
 
 
 function showEnvelope() {
@@ -130,11 +144,9 @@ function startEnvelopeShaking() {
 
     shakeInterval = setInterval(() => {
 
-        /*
-           Don't shake while it is opening.
-        */
-
-        if (envelope.classList.contains("open")) {
+        if (
+            envelope.classList.contains("open")
+        ) {
             return;
         }
 
@@ -162,11 +174,6 @@ envelopeWrapper.addEventListener("click", () => {
     envelope.classList.add("open");
 
 
-    /*
-       Wait for the flap + paper animation
-       to complete before changing scenes.
-    */
-
     setTimeout(() => {
 
         envelopeScene.classList.add("hidden");
@@ -184,19 +191,16 @@ envelopeWrapper.addEventListener("click", () => {
 
 doneButton.addEventListener("click", () => {
 
-    /*
-       Fold the letter away.
-    */
-
     letterPaper.classList.add("fold-back");
 
     doneButton.style.opacity = "0";
+
     doneButton.style.pointerEvents = "none";
 
 
     /*
-       After the folding animation,
-       reveal the GIF instead of the envelope.
+       Wait for the letter to fold,
+       then reveal the GIF.
     */
 
     setTimeout(() => {
@@ -208,3 +212,10 @@ doneButton.addEventListener("click", () => {
     }, 1300);
 
 });
+
+
+/* =====================================================
+   START
+===================================================== */
+
+startIntro();
